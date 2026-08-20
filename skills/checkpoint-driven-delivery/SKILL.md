@@ -4,7 +4,7 @@ description: Use when a product, roadmap item, or repository change needs to be 
 license: MIT
 compatibility: Model- and session-agnostic. For implementation or review, the agent needs repository access and the project's native verification tools.
 metadata:
-  author: tuanmaiquoc
+  author: mqtio
   version: "0.1.0"
 ---
 
