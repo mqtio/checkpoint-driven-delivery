@@ -1,6 +1,8 @@
 # Checkpoint-Driven Delivery
 
-A lightweight, model- and session-agnostic Agent Skill for turning product intent into bounded, verifiable implementation checkpoints.
+A lightweight, model- and session-agnostic Agent Skill for turning software product intent into bounded, verifiable implementation checkpoints.
+
+> **Scope:** this skill is for software engineering and coding delivery. It is not a general-purpose workflow for research, writing, slide creation, business analysis, or other non-coding work.
 
 ```text
 Product intent
@@ -100,7 +102,7 @@ After installation, the user-facing control is intentionally small:
 checkpoint start
 ```
 
-The skill stays active for the current work and infers whether it should **Design**, **Deliver**, or **Review** from context.
+The skill stays active for the current software engineering work and infers whether it should **Design**, **Deliver**, or **Review** from context.
 
 When you want to leave the workflow:
 
@@ -151,6 +153,7 @@ scripts/
 
 ## Design principles
 
+- **software-delivery focused** — implementation, bug fixes, refactors, migrations, infrastructure, ML/mobile/backend/frontend/full-stack engineering, and implementation review;
 - **model-agnostic** — ChatGPT, Gemini, Claude, Codex, Qoder, Kiro, Windsurf, or another agent can participate;
 - **session-agnostic** — one session or many;
 - **stack-agnostic** — full-stack, backend, migration, infrastructure, ML, mobile, etc.;
