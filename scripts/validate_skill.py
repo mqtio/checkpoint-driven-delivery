@@ -38,6 +38,8 @@ else:
             errors.append("description is required.")
         elif len(desc) > 1024:
             errors.append("description exceeds 1024 characters.")
+        if desc and not desc.startswith("Use when"):
+            errors.append('description should start with "Use when" for discovery.')
         if compatibility and len(compatibility) > 500:
             errors.append("compatibility exceeds 500 characters.")
         if license_ != "MIT":
@@ -62,6 +64,7 @@ if (SKILL_DIR / "README.md").exists():
 required = [
     "references/principles.md",
     "references/checkpoint-sizing.md",
+    "references/execution-discipline.md",
     "references/quality-gates.md",
     "references/contracts/checkpoint-contract.md",
     "references/contracts/implementation-handoff.md",
@@ -74,6 +77,11 @@ for rel in required:
 pressure = ROOT / "tests" / "pressure-scenarios.md"
 if not pressure.exists():
     errors.append("Missing pressure scenarios.")
+else:
+    pressure_text = pressure.read_text(encoding="utf-8")
+    for marker in ["P15", "P16", "P17", "P18", "P19", "P20"]:
+        if f"## {marker}" not in pressure_text:
+            errors.append(f"Missing execution-discipline pressure scenario: {marker}")
 
 if errors:
     print("Skill validation FAILED:")
@@ -83,6 +91,6 @@ if errors:
 
 print("Skill validation PASSED.")
 print(f"- Skill: {SKILL}")
-print("- Frontmatter constraints checked")
+print("- Frontmatter/discovery constraints checked")
 print("- Progressive-disclosure references checked")
-print("- Pressure scenarios present")
+print("- Start/stop and execution-discipline pressure scenarios present")
