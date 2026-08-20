@@ -2,8 +2,6 @@
 
 A lightweight, model- and session-agnostic Agent Skill for turning product intent into bounded, verifiable implementation checkpoints.
 
-The core idea is simple:
-
 ```text
 Product intent
     ↓
@@ -20,21 +18,24 @@ Verified repository state
 Next checkpoint
 ```
 
-The logical roles may be performed by one AI in one session, one AI across multiple sessions, different AIs, humans, or any combination.
+One AI in one session, one AI across sessions, multiple AIs, humans, or any combination can use the same workflow.
 
 ## Why
 
-Large coding prompts tend to mix product decomposition, architecture, implementation, testing, and future planning. This skill makes the execution boundary explicit:
+Large coding prompts often mix product decomposition, architecture, implementation, testing, and future planning. This skill makes the execution boundary explicit:
 
 - repository-first;
 - one coherent capability;
-- IN SCOPE / OUT OF SCOPE;
+- explicit IN SCOPE / OUT OF SCOPE;
 - verification-sized checkpoints;
-- real implementation paths;
-- repository-native quality gates;
+- smallest maintainable change;
+- root-cause-first debugging;
+- test-first behavior changes where practical;
+- fresh evidence before completion claims;
+- compact, evidence-first handoff;
 - hard stop before the next checkpoint.
 
-It is intentionally composable with TDD, debugging, UI/UX, security, repository-graph, performance, and review skills.
+The skill is intentionally composable with TDD, debugging, UI/UX, security, repository-graph, performance, and review skills. It does not vendor or require them.
 
 ## Install
 
@@ -52,7 +53,7 @@ Install globally:
 npx skills add mqtio/checkpoint-driven-delivery --skill checkpoint-driven-delivery -g
 ```
 
-Examples for specific supported agents:
+Specific agents:
 
 ```bash
 npx skills add mqtio/checkpoint-driven-delivery -a qoder
@@ -64,8 +65,6 @@ npx skills add mqtio/checkpoint-driven-delivery -a cursor
 npx skills add mqtio/checkpoint-driven-delivery -a claude-code
 npx skills add mqtio/checkpoint-driven-delivery -a github-copilot
 ```
-
-The `skills` CLI supports many additional agents and installs to their native skill directories.
 
 ### Manual examples
 
@@ -89,9 +88,39 @@ Windsurf:
 
 For project-scoped installation, use the agent's project skill directory instead.
 
-### ChatGPT and other hosted assistants
+### Hosted assistants
 
-If the host does not expose a filesystem skill installer, attach or import the skill folder/files through that product's supported project/custom-instructions mechanism. The skill itself does not require a specific model vendor.
+If the host does not expose a filesystem skill installer, attach/import the skill folder through that product's supported project or custom-instructions mechanism.
+
+## Use
+
+After installation, the user-facing control is intentionally small:
+
+```text
+checkpoint start
+```
+
+The skill stays active for the current work and infers whether it should **Design**, **Deliver**, or **Review** from context.
+
+When you want to leave the workflow:
+
+```text
+checkpoint stop
+```
+
+You do not need to select a model, role, or session topology. Logical roles may happen in one session or be handed across agents through the included contracts.
+
+## What the skill absorbs
+
+The core includes several proven engineering disciplines without depending on third-party skill packages:
+
+- concise communication while preserving commands, identifiers, errors, and evidence;
+- red-green-refactor behavior for changes where test-first is practical;
+- root-cause investigation before bug fixes;
+- fresh verification before any success/completion claim;
+- scope and stop boundaries that specialized skills cannot override.
+
+Installed specialized skills can still strengthen execution technique.
 
 ## Repository layout
 
@@ -101,6 +130,7 @@ skills/checkpoint-driven-delivery/
 ├── references/
 │   ├── principles.md
 │   ├── checkpoint-sizing.md
+│   ├── execution-discipline.md
 │   ├── quality-gates.md
 │   └── contracts/
 │       ├── checkpoint-contract.md
@@ -119,25 +149,13 @@ scripts/
 └── validate_skill.py
 ```
 
-## Usage
-
-Ask naturally, for example:
-
-- "Turn this MVP into capability checkpoints and design the next one."
-- "Implement this checkpoint only and stop after verification."
-- "Review this checkpoint against its contract and repository evidence."
-- "This task is too large; find a verification-sized checkpoint boundary."
-
-The skill selects the logical role: **Design**, **Deliver**, or **Review**.
-
 ## Design principles
 
-The skill is deliberately:
 - **model-agnostic** — ChatGPT, Gemini, Claude, Codex, Qoder, Kiro, Windsurf, or another agent can participate;
 - **session-agnostic** — one session or many;
 - **stack-agnostic** — full-stack, backend, migration, infrastructure, ML, mobile, etc.;
 - **contract-centric** — handoffs are explicit artifacts, not hidden conversation state;
-- **composable** — specialized engineering skills remain useful and do not need to be bundled here.
+- **composable** — specialized engineering skills remain useful without becoming dependencies.
 
 ## Validation
 
@@ -145,15 +163,13 @@ The skill is deliberately:
 python scripts/validate_skill.py
 ```
 
-Pull requests run the same validator in GitHub Actions.
-
-Behavioral pressure scenarios live in `tests/pressure-scenarios.md`. Changes to the skill should be tested against those scenarios.
+Pull requests run the same validator in GitHub Actions. Behavioral pressure scenarios live in `tests/pressure-scenarios.md`.
 
 ## Status
 
 `v0.1.0` — public preview.
 
-The first goal is to validate the protocol across multiple agents, stacks, and project sizes before expanding the framework.
+The goal is to validate the protocol across multiple agents, stacks, and project sizes before expanding it.
 
 ## References
 
