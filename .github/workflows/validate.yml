@@ -19,3 +19,5 @@ jobs:
           python-version: "3.12"
       - name: Validate Agent Skill package
         run: python scripts/validate_skill.py
+      - name: Run skill contract tests
+        run: python -m unittest -v tests.test_skill_contract
