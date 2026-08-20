@@ -43,26 +43,26 @@ This repository follows the open [Agent Skills specification](https://agentskill
 ### Recommended — Skills CLI
 
 ```bash
-npx skills add tuanmaiquoc/checkpoint-driven-delivery --skill checkpoint-driven-delivery
+npx skills add mqtio/checkpoint-driven-delivery --skill checkpoint-driven-delivery
 ```
 
 Install globally:
 
 ```bash
-npx skills add tuanmaiquoc/checkpoint-driven-delivery --skill checkpoint-driven-delivery -g
+npx skills add mqtio/checkpoint-driven-delivery --skill checkpoint-driven-delivery -g
 ```
 
 Examples for specific supported agents:
 
 ```bash
-npx skills add tuanmaiquoc/checkpoint-driven-delivery -a qoder
-npx skills add tuanmaiquoc/checkpoint-driven-delivery -a kiro-cli
-npx skills add tuanmaiquoc/checkpoint-driven-delivery -a windsurf
-npx skills add tuanmaiquoc/checkpoint-driven-delivery -a gemini-cli
-npx skills add tuanmaiquoc/checkpoint-driven-delivery -a codex
-npx skills add tuanmaiquoc/checkpoint-driven-delivery -a cursor
-npx skills add tuanmaiquoc/checkpoint-driven-delivery -a claude-code
-npx skills add tuanmaiquoc/checkpoint-driven-delivery -a github-copilot
+npx skills add mqtio/checkpoint-driven-delivery -a qoder
+npx skills add mqtio/checkpoint-driven-delivery -a kiro-cli
+npx skills add mqtio/checkpoint-driven-delivery -a windsurf
+npx skills add mqtio/checkpoint-driven-delivery -a gemini-cli
+npx skills add mqtio/checkpoint-driven-delivery -a codex
+npx skills add mqtio/checkpoint-driven-delivery -a cursor
+npx skills add mqtio/checkpoint-driven-delivery -a claude-code
+npx skills add mqtio/checkpoint-driven-delivery -a github-copilot
 ```
 
 The `skills` CLI supports many additional agents and installs to their native skill directories.
